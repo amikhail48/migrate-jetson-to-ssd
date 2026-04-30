@@ -38,7 +38,8 @@ fi
 echo "Creating new data partition..."
 sgdisk -n 0:0:0 -t 0:8300 -c 0:"PYMEMO_DATA" "$DRIVE"
 partprobe "$DRIVE"
-sleep 2dentify the new partition device
+sleep 2
+# Identify the new partition device
 NEW_PART_NUM=$(sgdisk -p "$DRIVE" | grep "^ " | awk '{print $1}' | sort -n | tail -1)
 if [[ "$DRIVE" == *"nvme"* ]]; then
     NEW_PART_DEV="${DRIVE}p${NEW_PART_NUM}"
